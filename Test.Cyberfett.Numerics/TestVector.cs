@@ -276,54 +276,6 @@ namespace Test.Cyberfett.Numerics
             }
         }
 
-        [Ignore]
-        [Test]
-        public void CompareArrayInitializationTimes()
-        {
-            var watch = new System.Diagnostics.Stopwatch();
-            var size = 1024 * 1024;
-
-            watch.Start();
-            for (int i = 0; i < 100; i++)
-            {
-                using (var oneMB = new ColumnVector<byte>(size))
-                {
-                    //oneMB[13] = (byte)i;
-                }
-            }
-            watch.Stop();
-            var myTime = watch.ElapsedTicks;
-
-            watch.Reset();
-            watch.Start();
-            for (int i = 0; i < 100; i++)
-            {
-                var oneMB = new byte[size];
-                //oneMB[13] = (byte)i;
-            }
-            watch.Stop();
-            var theirTime = watch.ElapsedTicks;
-
-            watch.Reset();
-            watch.Start();
-            for (int i = 0; i < 100; i++)
-            {
-                using (ILScope.Enter())
-                {
-                    ILArray<byte> oneMB = ILMath.New<byte>(size);
-                    //oneMB[13] = (byte)i;
-                }
-            }
-            watch.Stop();
-            var ilTime = watch.ElapsedTicks;
-
-            Assert.That(myTime, Is.LessThanOrEqualTo(ilTime));
-            Assert.That(myTime, Is.LessThanOrEqualTo(theirTime));
-
-        }
-
-    }
-
     struct mystruct {
         int a;
         double b;
