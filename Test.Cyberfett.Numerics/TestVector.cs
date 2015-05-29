@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using NUnit.Framework;
 using Cyberfett.Numerics;
-using ILNumerics;
 
 namespace Test.Cyberfett.Numerics
 {
@@ -255,7 +254,7 @@ namespace Test.Cyberfett.Numerics
         [Test]
         public void ManyVectorsInLoop()
         {
-            for (int i = 0; i < 100000; i++ )
+            for (int i = 0; i < 100000; i++)
             {
                 using (var oneMB = new ColumnVector<byte>(1024 * 1024))
                 {
@@ -275,6 +274,7 @@ namespace Test.Cyberfett.Numerics
                 System.GC.Collect();
             }
         }
+    }
 
     struct mystruct {
         int a;
